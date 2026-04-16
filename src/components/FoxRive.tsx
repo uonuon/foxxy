@@ -15,15 +15,12 @@ type Props = {
 };
 
 /**
- * Optional state-machine wiring. If the bundled .riv file exposes these
- * names we will attempt to drive the "fail" boolean from FoxState. If it
- * does not, we leave the state machine alone and the fox will just play
- * its default animation.
- *
- * To enable: open the .riv in Rive editor, copy the actual state-machine
- * name and the boolean input name, then set them here.
+ * State machine name as authored in fox-girl.riv (see Rive editor's
+ * Animations panel). The boolean input name is a best guess — verify in
+ * the editor's State Machine inspector and update if needed. If the
+ * input doesn't exist, the setInputState call no-ops (try/catch below).
  */
-const STATE_MACHINE: string | undefined = undefined; // e.g. "State machine"
+const STATE_MACHINE: string | undefined = "State machine";
 const FAIL_INPUT = "fail";
 
 /**
