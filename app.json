@@ -1,0 +1,67 @@
+{
+  "expo": {
+    "name": "Foxxy",
+    "slug": "foxxy",
+    "scheme": "foxxy",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f4ead1"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.foxxy.foxxy",
+      "buildNumber": "1",
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#f4ead1"
+      },
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "android": {
+      "package": "app.foxxy.foxxy",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#f4ead1"
+      },
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#f4ead1"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "locales": {
+      "ar": "./src/locales/ios-ar.json",
+      "en": "./src/locales/ios-en.json"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 320,
+          "backgroundColor": "#f4ead1"
+        }
+      ]
+    ],
+    "extra": {
+      "router": {}
+    }
+  }
+}

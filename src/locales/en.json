@@ -1,0 +1,59 @@
+{
+  "app": {
+    "name": "Foxxy",
+    "tagline": "Focus with a friend from the desert"
+  },
+  "burrow": {
+    "greeting_morning": "Good morning",
+    "greeting_afternoon": "Good afternoon",
+    "greeting_evening": "Good evening",
+    "fox_idle": "Foxxy is waiting",
+    "fox_working": "Foxxy is digging",
+    "fox_sleeping": "Foxxy is resting",
+    "start_focus": "Start focus",
+    "streak_days": "{{count}} day streak",
+    "streak_days_zero": "Start your streak",
+    "finds_label": "Desert finds"
+  },
+  "session": {
+    "choose_duration": "Choose your focus length",
+    "minutes": "min",
+    "what_are_you_doing": "What are you focusing on?",
+    "intent_placeholder": "Studying, writing, reading…",
+    "begin": "Begin",
+    "running": "Stay with Foxxy",
+    "time_left": "Time left",
+    "give_up": "End early",
+    "give_up_warn": "Foxxy will lose progress. Continue?",
+    "give_up_yes": "Yes, end",
+    "give_up_no": "Keep going",
+    "complete_title": "Well done!",
+    "complete_subtitle": "Foxxy decorated the burrow",
+    "earned_finds": "+{{count}} finds",
+    "broken_title": "Foxxy is sad",
+    "broken_subtitle": "The burrow collapsed",
+    "back_home": "Back to burrow"
+  },
+  "stats": {
+    "title": "Your journey",
+    "today_focus": "Today",
+    "this_week": "This week",
+    "all_time": "All time",
+    "current_streak": "Current streak",
+    "longest_streak": "Longest streak",
+    "sessions": "sessions",
+    "hours": "h",
+    "minutes_short": "m"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "theme_auto": "Auto",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "notifications": "Notifications",
+    "about": "About Foxxy",
+    "version": "Version"
+  }
+}

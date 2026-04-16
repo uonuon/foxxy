@@ -1,0 +1,59 @@
+{
+  "app": {
+    "name": "فوكسي",
+    "tagline": "ركّز مع صديق من الصحراء"
+  },
+  "burrow": {
+    "greeting_morning": "صباح الخير",
+    "greeting_afternoon": "نهارك سعيد",
+    "greeting_evening": "مساء الخير",
+    "fox_idle": "فوكسي ينتظرك",
+    "fox_working": "فوكسي يحفر",
+    "fox_sleeping": "فوكسي يرتاح",
+    "start_focus": "ابدأ التركيز",
+    "streak_days": "{{count}} يوم متواصل",
+    "streak_days_zero": "ابدأ سلسلتك",
+    "finds_label": "كنوز الصحراء"
+  },
+  "session": {
+    "choose_duration": "اختر مدة التركيز",
+    "minutes": "دقيقة",
+    "what_are_you_doing": "على ماذا تركّز؟",
+    "intent_placeholder": "دراسة، كتابة، قراءة…",
+    "begin": "ابدأ",
+    "running": "ابقَ مع فوكسي",
+    "time_left": "الوقت المتبقي",
+    "give_up": "إنهاء مبكر",
+    "give_up_warn": "سيخسر فوكسي تقدّمه. هل تريد الاستمرار؟",
+    "give_up_yes": "نعم، إنهاء",
+    "give_up_no": "استمرار",
+    "complete_title": "أحسنت!",
+    "complete_subtitle": "زيّن فوكسي الجحر",
+    "earned_finds": "+{{count}} كنز",
+    "broken_title": "فوكسي حزين",
+    "broken_subtitle": "انهار الجحر",
+    "back_home": "العودة للجحر"
+  },
+  "stats": {
+    "title": "رحلتك",
+    "today_focus": "اليوم",
+    "this_week": "هذا الأسبوع",
+    "all_time": "الإجمالي",
+    "current_streak": "السلسلة الحالية",
+    "longest_streak": "أطول سلسلة",
+    "sessions": "جلسة",
+    "hours": "س",
+    "minutes_short": "د"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "theme_auto": "تلقائي",
+    "theme_light": "فاتح",
+    "theme_dark": "داكن",
+    "notifications": "الإشعارات",
+    "about": "عن فوكسي",
+    "version": "الإصدار"
+  }
+}
