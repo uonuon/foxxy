@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import Rive, {
   Alignment,
@@ -7,7 +7,7 @@ import Rive, {
 } from "rive-react-native";
 
 import foxFile from "../../assets/rive/fox-girl.riv";
-import type { FoxState } from "./FoxPlaceholder";
+import { FoxPlaceholder, type FoxState } from "./FoxPlaceholder";
 
 type Props = {
   state?: FoxState;
@@ -15,47 +15,66 @@ type Props = {
 };
 
 /**
- * State machine name in the .riv file. Common defaults are "State Machine 1"
- * or a custom name set in Rive editor. If the bundled .riv ever changes, you
- * may need to inspect it in Rive and update this.
+ * Optional state-machine wiring. If the bundled .riv file exposes these
+ * names we will attempt to drive the "fail" boolean from FoxState. If it
+ * does not, we leave the state machine alone and the fox will just play
+ * its default animation.
+ *
+ * To enable: open the .riv in Rive editor, copy the actual state-machine
+ * name and the boolean input name, then set them here.
  */
-const STATE_MACHINE = "State Machine 1";
-
-/**
- * Boolean input on the state machine that toggles the "distracted/sad"
- * variant of the idle pose. The provided fox file uses an `idle-fail`
- * animation; if the input name differs, update here.
- */
+const STATE_MACHINE: string | undefined = undefined; // e.g. "State machine"
 const FAIL_INPUT = "fail";
 
 /**
- * Wraps the Rive fennec fox. Reacts to FoxState by toggling the `fail`
- * boolean on the state machine. Falls through silently if the input or
- * state machine isn't present so the screen never crashes — the visible
- * default is whatever the editor configured as the entry state.
+ * Wraps the Rive fox character. Hardened with an error fallback so a
+ * malformed or missing state-machine name can never crash the screen —
+ * we render the SVG placeholder instead.
+ *
+ * Note: Rive's iOS runtime calls `fatalError` in Swift when it can't find
+ * a requested artboard or state machine. The `onError` handler here will
+ * not catch those (they happen on a background queue and trap before
+ * delegating). The safe pattern is to simply NOT pass a state-machine
+ * name unless you've verified it exists in the file.
  */
 export function FoxRive({ state = "idle", size = 200 }: Props) {
   const riveRef = useRef<RiveRef>(null);
+  const [failed, setFailed] = useState(false);
 
+  // If we have a confirmed state-machine name, attempt to flip its `fail`
+  // boolean as FoxState changes. Wrapped in try/catch because the input
+  // may not exist even if the state machine does.
   useEffect(() => {
-    if (!riveRef.current) return;
+    if (!STATE_MACHINE || !riveRef.current) return;
     const failing = state === "distracted" || state === "sleeping";
     try {
       riveRef.current.setInputState(STATE_MACHINE, FAIL_INPUT, failing);
     } catch {
-      // input doesn't exist in this build of the .riv — ignore quietly.
+      // Input doesn't exist — silently no-op.
     }
   }, [state]);
+
+  if (failed) {
+    return <FoxPlaceholder state={state} size={size} />;
+  }
 
   return (
     <View style={{ width: size, height: size }}>
       <Rive
         ref={riveRef}
         source={foxFile}
-        stateMachineName={STATE_MACHINE}
+        {...(STATE_MACHINE ? { stateMachineName: STATE_MACHINE } : {})}
         autoplay
         fit={Fit.Contain}
         alignment={Alignment.Center}
+        onError={(err) => {
+          // Falls back to SVG fox if Rive can't load the file or finds
+          // the requested state machine missing.
+          if (__DEV__) {
+            console.warn("[FoxRive] error, falling back to SVG:", err);
+          }
+          setFailed(true);
+        }}
         style={{ width: "100%", height: "100%" }}
       />
     </View>
