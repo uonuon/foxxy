@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { MotiView } from "moti";
 import * as Haptics from "expo-haptics";
 
-import { FoxPlaceholder } from "@/components/FoxPlaceholder";
+import { Fox } from "@/components/Fox";
 import { PressableScale } from "@/components/PressableScale";
 import { addFinds } from "@/db";
 import { useLanguage } from "@/providers/LanguageProvider";
@@ -46,7 +46,7 @@ export default function SessionResult() {
           animate={{ opacity: 1, translateY: 0 }}
           transition={{ type: "timing", duration: 500 }}
         >
-          <FoxPlaceholder
+          <Fox
             state={completed ? "idle" : "distracted"}
             size={220}
           />

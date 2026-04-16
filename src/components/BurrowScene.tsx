@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop, Rect, Path } from "react-native-svg";
 
-import { FoxPlaceholder, type FoxState } from "./FoxPlaceholder";
+import { Fox, type FoxState } from "./Fox";
 import { palette } from "@/theme/colors";
 
 type Props = {
@@ -74,7 +74,7 @@ export function BurrowScene({ state = "idle", height = 320 }: Props) {
           alignItems: "center",
         }}
       >
-        <FoxPlaceholder state={state} size={200} />
+        <Fox state={state} size={200} />
       </View>
     </View>
   );
