@@ -13,9 +13,37 @@ export type SupportedLanguage = "en" | "ar";
 export const SUPPORTED_LANGUAGES: SupportedLanguage[] = ["en", "ar"];
 
 function detectDeviceLanguage(): SupportedLanguage {
-  const locales = Localization.getLocales();
-  const primary = locales[0]?.languageCode ?? "en";
-  return primary === "ar" ? "ar" : "en";
+  try {
+    const locales = Localization.getLocales();
+    const primary = locales[0]?.languageCode ?? "en";
+    return primary === "ar" ? "ar" : "en";
+  } catch {
+    return "en";
+  }
+}
+
+/**
+ * Initialize i18n synchronously at module load. This is critical: any
+ * component that calls `useTranslation()` would otherwise see different
+ * hook shapes between renders if init were async, violating Rules of Hooks.
+ *
+ * The stored-language override is loaded asynchronously after mount via
+ * `loadStoredLanguage()` and applied with `i18n.changeLanguage`.
+ */
+const initialLanguage = detectDeviceLanguage();
+
+if (!i18n.isInitialized) {
+  i18n.use(initReactI18next).init({
+    resources: {
+      en: { translation: en },
+      ar: { translation: ar },
+    },
+    lng: initialLanguage,
+    fallbackLng: "en",
+    compatibilityJSON: "v4",
+    interpolation: { escapeValue: false },
+    react: { useSuspense: false },
+  });
 }
 
 export async function getStoredLanguage(): Promise<SupportedLanguage | null> {
@@ -38,26 +66,16 @@ export async function setStoredLanguage(lang: SupportedLanguage): Promise<void> 
   }
 }
 
-export async function initI18n(): Promise<SupportedLanguage> {
+/**
+ * Load the user's stored language preference and apply it to i18n if it
+ * differs from the device default. Returns the active language.
+ */
+export async function loadStoredLanguage(): Promise<SupportedLanguage> {
   const stored = await getStoredLanguage();
-  const initial = stored ?? detectDeviceLanguage();
-
-  if (!i18n.isInitialized) {
-    await i18n.use(initReactI18next).init({
-      resources: {
-        en: { translation: en },
-        ar: { translation: ar },
-      },
-      lng: initial,
-      fallbackLng: "en",
-      compatibilityJSON: "v4",
-      interpolation: { escapeValue: false },
-    });
-  } else {
-    await i18n.changeLanguage(initial);
+  if (stored && stored !== i18n.language) {
+    await i18n.changeLanguage(stored);
   }
-
-  return initial;
+  return (i18n.language as SupportedLanguage) ?? initialLanguage;
 }
 
 export default i18n;

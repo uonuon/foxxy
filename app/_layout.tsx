@@ -1,4 +1,6 @@
 import "../global.css";
+// Import i18n early so it initializes before any screen renders.
+import "@/i18n";
 
 import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
